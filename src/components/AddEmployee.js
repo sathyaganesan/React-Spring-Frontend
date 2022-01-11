@@ -5,11 +5,11 @@ import { EmployeeContext } from '../services/EmployeeContext';
 const AddEmployee = () => {
 
     const {first_name, setFirst_name, last_name, setLast_name, email, setEmail,
-        addEmployee, getEmployeeById, updateEmployee} = useContext(EmployeeContext);
+        addEmployee, getEmployeeById, updateEmployee, newEmployee} = useContext(EmployeeContext);
 
     const {id} = useParams(); 
 
-    useEffect(() => {getEmployeeById(id)}, [])
+    useEffect(() => {getEmployeeById(id)}, [id])
 
     return (
         <div>
@@ -57,10 +57,8 @@ const AddEmployee = () => {
                                     >
                                     </input>
                                 </div>
-                                {(id)? <button className='btn btn-success' onClick={(e) => { updateEmployee(id)}}> Update </button> :  
-                                <button className='btn btn-success' onClick={(e) => {e.preventDefault(); 
-                                                addEmployee(e)
-                                        }}> Save </button>}
+                                {(id)? <button className='btn btn-success' onClick={(e) => { updateEmployee(id, newEmployee)}}> Update </button> :  
+                                <button className='btn btn-success' onClick={(e) => {addEmployee(e)}}> Save </button>}
                                 <Link to = "/" className='btn btn-danger mx-4' >Cancel</Link>
                             </form>
                         </div>

@@ -29,13 +29,10 @@ export const EmployeeProvider = (props) => {
 // To add new employee to the list:
     const newEmployee = {first_name, last_name, email};
     const addEmployee = (e) => {
-        // e.preventDefault();
+        e.preventDefault();
         return axios
-        .post(`http://localhost:8080/api/v1/employees`, {first_name, last_name, email})
+        .post(`http://localhost:8080/api/v1/employees`, newEmployee)
         .then((res) => {
-        //     setFirst_name(res.data.first_name);
-        //     setLast_name(res.data.last_name);
-        //     setEmail(res.data.email);
             navigate('/');
             console.log("Add Employee", res.data);
         })
@@ -67,7 +64,7 @@ export const EmployeeProvider = (props) => {
     }
 
 // To update the employee
-    const updateEmployee = (id) => {
+    const updateEmployee = (id, newEmployee) => {
             return axios
             .put(`http://localhost:8080/api/v1/employees/${id}`, newEmployee)
             .then((res) => {
@@ -83,7 +80,7 @@ export const EmployeeProvider = (props) => {
         <EmployeeContext.Provider 
             value={{employees, setEmployees, getEmployees, first_name, setFirst_name, 
             last_name, setLast_name, email, setEmail, addEmployee, deleteEmployee, 
-            updateEmployee, getEmployeeById}}>
+            updateEmployee, getEmployeeById, newEmployee}}>
                 {props.children}
         </EmployeeContext.Provider>
     )
